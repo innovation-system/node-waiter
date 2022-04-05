@@ -1,0 +1,15 @@
+[Unit]
+Description=Node Waiter
+
+[Service]
+WorkingDirectory=/home/on-system/node-waiter
+ExecStart=/usr/bin/node ./index.js
+Restart=no
+User=nobody
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
