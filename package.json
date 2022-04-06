@@ -1,0 +1,25 @@
+{
+  "name": "waiter",
+  "version": "1.0.0",
+  "description": "Simple nodejs webserver that shows a loader until a port is reachable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innovation-system/node-waiter.git"
+  },
+  "keywords": [
+    "node",
+    "waiter",
+    "loader",
+    "html"
+  ],
+  "author": "Innovation-System S.r.l",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/innovation-system/node-waiter/issues"
+  },
+  "homepage": "https://github.com/innovation-system/node-waiter#readme"
+}
