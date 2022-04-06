@@ -4,7 +4,16 @@ const http = require('http');
 const fs = require('fs');
 const net = require('net')
 
-var config = require('./config')
+const config = require('./config')
+
+let url
+
+try {
+	url = new URL(config.url);	
+} catch (error) {
+	console.error('Url provided in config is not valid:', error.message);
+	process.exit(1);
+}
 
 const ping = (h, p) => {
 
@@ -33,15 +42,20 @@ const app = http.createServer(async (req, res) => {
 		req.url = '/index.html';
 		res.end(fs.readFileSync(__dirname + req.url));
 	} else if (req.url === '/ping') {
-		var available = await ping(config.host, config.port);
-		var data = {success: available, url: config.protocol + config.host + ':' + config.port}
+		console.log('Sending ping to: ' + url.hostname + ':' + url.port);
+		var available = await ping(url.hostname, url.port);
+		var data = { success: available, url: config.url }
 		res.writeHead(200, { 'Content-Type': 'text/plain' });
 		res.end(JSON.stringify(data));
-		if (available) process.exit(0)
+		console.log('Ping successfull');
+		if (available && config.killAfterSuccess) {
+			console.log('Killing process');
+			process.exit(0)
+		}
 	}
 	else res.end();
 });
 
-console.log(`NodeJS Waiter listening on port ${config.listenPort}.\nWaiting for connections to: ${config.protocol}${config.host}:${config.port}`);
+console.log(`NodeJS Waiter listening on port ${config.port}.\nWaiting for connections to: ${config.url}`);
 
-app.listen(config.listenPort);
+app.listen(config.port);

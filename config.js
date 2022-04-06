@@ -1,6 +1,5 @@
 module.exports = {
-    protocol: 'https://',
-    host: 'localhost',
-    port: 8080,
-    listenPort: 4000
+    url: 'http://localhost:3000',
+    port: 4000,
+    killAfterSuccess: true
 }
