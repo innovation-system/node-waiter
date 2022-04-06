@@ -1,5 +1,5 @@
 module.exports = {
-    url: 'http://localhost:3000',
+    url: 'https://localhost:8080',
     port: 4000,
-    killAfterSuccess: true
+    killAfterSuccess: false
 }
